@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globalsolutionsflutter1sem/ui/components/app_logo.dart';
 
-// Top app bar reutilizável do app
-// Equivalente ao LudoBGTopBar do projeto de referência
 class SpaceTopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final bool showBackButton;

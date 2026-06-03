@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:globalsolutionsflutter1sem/model/space_mission.dart';
+import 'package:globalsolutionsflutter1sem/model/solar_property.dart';
 import 'package:globalsolutionsflutter1sem/ui/components/space_top_app_bar.dart';
 
-// Tela de detalhe de uma missão
-// Conta como uma das 4 telas obrigatórias da navegação (requisito 3)
-class MissionDetailScreen extends StatelessWidget {
-  final SpaceMission? mission;
+class PropertyDetailScreen extends StatelessWidget {
+  final SolarProperty? property;
   final VoidCallback onBackClick;
 
-  const MissionDetailScreen({
+  const PropertyDetailScreen({
     super.key,
-    required this.mission,
+    required this.property,
     required this.onBackClick,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (mission == null) {
+    if (property == null) {
       return Scaffold(
         appBar: SpaceTopAppBar(showBackButton: true),
-        body: const Center(child: Text('Missão não encontrada')),
+        body: const Center(child: Text('Imóvel não encontrado')),
       );
     }
 
     final colors = Theme.of(context).colorScheme;
-    final m = mission!;
+    final p = property!;
 
     return Scaffold(
       appBar: SpaceTopAppBar(showBackButton: true),
@@ -33,19 +31,7 @@ class MissionDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner / imagem da missão
-            // -----------------------------------------------------------------
-            // IMAGEM: substitua o Container abaixo por:
-            //   ClipRRect(
-            //     borderRadius: BorderRadius.circular(12),
-            //     child: Image.asset(
-            //       m.imagePath,
-            //       width: double.infinity,
-            //       height: 200,
-            //       fit: BoxFit.cover,
-            //     ),
-            //   )
-            // -----------------------------------------------------------------
+            // Banner
             Container(
               width: double.infinity,
               height: 180,
@@ -55,7 +41,7 @@ class MissionDetailScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  m.categories.isNotEmpty ? m.categories.first.emoji : '🚀',
+                  p.types.isNotEmpty ? p.types.first.emoji : '☀️',
                   style: const TextStyle(fontSize: 72),
                 ),
               ),
@@ -63,9 +49,8 @@ class MissionDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // Título
             Text(
-              m.title,
+              p.title,
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall
@@ -74,17 +59,16 @@ class MissionDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            // Categorias
             Wrap(
               spacing: 8,
-              children: m.categories
-                  .map((c) => Chip(label: Text('${c.emoji} ${c.name}')))
+              children: p.types
+                  .map((t) => Chip(label: Text('${t.emoji} ${t.name}')))
                   .toList(),
             ),
 
             const SizedBox(height: 16),
 
-            // Informações resumidas
+            // Indicadores financeiros
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -96,20 +80,38 @@ class MissionDetailScreen extends StatelessWidget {
                   children: [
                     _InfoRow(
                       icon: Icons.location_on_outlined,
-                      label: 'Destino',
-                      value: m.destination,
+                      label: 'Endereço',
+                      value: p.address,
                     ),
                     const Divider(height: 24),
                     _InfoRow(
-                      icon: Icons.calendar_today_outlined,
-                      label: 'Ano',
-                      value: m.year.toString(),
+                      icon: Icons.roofing,
+                      label: 'Área do telhado',
+                      value: '${p.roofAreaM2.toStringAsFixed(0)} m²',
                     ),
                     const Divider(height: 24),
                     _InfoRow(
-                      icon: Icons.attach_money,
-                      label: 'Custo estimado',
-                      value: 'US\$ ${m.costBillions}B',
+                      icon: Icons.bolt,
+                      label: 'Conta mensal',
+                      value: 'R\$ ${p.monthlyBillBrl.toStringAsFixed(0)}',
+                    ),
+                    const Divider(height: 24),
+                    _InfoRow(
+                      icon: Icons.wb_sunny_rounded,
+                      label: 'SunScore',
+                      value: '${p.sunScoreIndex.toStringAsFixed(0)} / 100',
+                    ),
+                    const Divider(height: 24),
+                    _InfoRow(
+                      icon: Icons.schedule,
+                      label: 'Payback estimado',
+                      value: '${p.paybackYears.toStringAsFixed(1)} anos',
+                    ),
+                    const Divider(height: 24),
+                    _InfoRow(
+                      icon: Icons.trending_up,
+                      label: 'TIR (retorno)',
+                      value: '${p.tirPercent.toStringAsFixed(1)}% a.a.',
                     ),
                   ],
                 ),
@@ -118,9 +120,8 @@ class MissionDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // Descrição
             Text(
-              'Sobre a missão',
+              'Análise orbital',
               style: Theme.of(context)
                   .textTheme
                   .titleMedium
@@ -128,19 +129,18 @@ class MissionDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              m.description,
+              p.description,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
 
             const SizedBox(height: 32),
 
-            // Botão voltar
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: onBackClick,
                 icon: const Icon(Icons.arrow_back),
-                label: const Text('Voltar às missões'),
+                label: const Text('Voltar aos imóveis'),
               ),
             ),
           ],
@@ -150,7 +150,6 @@ class MissionDetailScreen extends StatelessWidget {
   }
 }
 
-// Widget auxiliar para cada linha de info
 class _InfoRow extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -168,8 +167,9 @@ class _InfoRow extends StatelessWidget {
       children: [
         Icon(icon, size: 20, color: Theme.of(context).colorScheme.primary),
         const SizedBox(width: 12),
-        Text(label, style: Theme.of(context).textTheme.bodyMedium),
-        const Spacer(),
+        Expanded(
+          child: Text(label, style: Theme.of(context).textTheme.bodyMedium),
+        ),
         Text(
           value,
           style: Theme.of(context)

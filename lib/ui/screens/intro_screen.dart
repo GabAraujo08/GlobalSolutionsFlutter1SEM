@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globalsolutionsflutter1sem/navigation/app_routes.dart';
 
-// Dados de cada página da introdução
-// TODO: ajuste os textos e ícones conforme o tema refinado
 class _IntroPage {
   final String title;
   final String description;
@@ -15,8 +13,6 @@ class _IntroPage {
   });
 }
 
-// Tela de Introdução — explica o app com botões avançar/voltar
-// Requisito 2 da entrega (1,0 ponto)
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
 
@@ -27,25 +23,24 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   int _currentPage = 0;
 
-  // TODO: ajuste estas páginas ao tema final da Global Solution
   final List<_IntroPage> _pages = const [
     _IntroPage(
-      title: 'Bem-vindo ao SpaceExpedition',
+      title: 'Bem-vindo ao SunScore',
       description:
-          'Acompanhe as principais missões espaciais do presente e do futuro em um só lugar.',
-      icon: Icons.rocket_launch,
+          'Descubra se vale a pena instalar painéis solares no seu imóvel com precisão orbital. Cruzamos dados de satélites espaciais para gerar o relatório financeiro mais confiável do mercado.',
+      icon: Icons.wb_sunny_rounded,
     ),
     _IntroPage(
-      title: 'Explore Missões',
+      title: 'Dados do Espaço, Resultado Real',
       description:
-          'Filtre por categoria — lunar, marciana, científica — e descubra detalhes de cada expedição.',
-      icon: Icons.explore,
+          'Utilizamos satélites como o Sentinel-5P (ESA) e dados da NOAA para medir irradiação, índice de sujeira, temperatura e risco de apagões — variáveis que calculadoras comuns ignoram.',
+      icon: Icons.satellite_alt,
     ),
     _IntroPage(
-      title: 'Fique por Dentro',
+      title: 'Seu Telhado como Investimento',
       description:
-          'Saiba custos, destinos e anos de lançamento de cada missão para entender o futuro da exploração espacial.',
-      icon: Icons.public,
+          'Veja o Payback exato, a TIR do sistema e o Score de Risco Climático do seu CEP. Tome decisões de energia com a mesma segurança que investidores usam no mercado financeiro.',
+      icon: Icons.trending_up,
     ),
   ];
 
@@ -76,7 +71,6 @@ class _IntroScreenState extends State<IntroScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Indicador de progresso
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(_pages.length, (i) {
@@ -95,11 +89,6 @@ class _IntroScreenState extends State<IntroScreen> {
 
               const SizedBox(height: 48),
 
-              // Ícone / imagem da página
-              // -----------------------------------------------------------------
-              // IMAGEM: quando tiver imagens, substitua o Icon por:
-              //   Image.asset('assets/images/intro_$_currentPage.png', height: 180)
-              // -----------------------------------------------------------------
               Icon(page.icon, size: 100, color: colors.primary),
 
               const SizedBox(height: 32),
@@ -123,7 +112,6 @@ class _IntroScreenState extends State<IntroScreen> {
 
               const SizedBox(height: 48),
 
-              // Botões Voltar / Avançar
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

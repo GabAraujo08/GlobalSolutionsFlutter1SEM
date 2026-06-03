@@ -13,10 +13,10 @@ class GlobalSolutionsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Global Solutions',
+      title: 'SunScore',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: const Color(0xFFF59E0B), // âmbar solar
         ),
         useMaterial3: true,
       ),

@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:globalsolutionsflutter1sem/model/mission_category.dart';
+import 'package:globalsolutionsflutter1sem/model/property_type.dart';
 
-// Card circular de categoria usado na lista horizontal de filtros
-// Equivalente ao GamePublisherCard do projeto de referência
-class MissionCategoryCard extends StatelessWidget {
-  final MissionCategory category;
-  final Function(MissionCategory)? onClick;
+class PropertyTypeCard extends StatelessWidget {
+  final PropertyType type;
+  final Function(PropertyType)? onClick;
 
-  const MissionCategoryCard({
+  const PropertyTypeCard({
     super.key,
-    required this.category,
+    required this.type,
     this.onClick,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onClick != null ? () => onClick!(category) : null,
+      onTap: onClick != null ? () => onClick!(type) : null,
       child: SizedBox(
         width: 80,
         height: 80,
@@ -29,10 +27,10 @@ class MissionCategoryCard extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(category.emoji, style: const TextStyle(fontSize: 22)),
+                  Text(type.emoji, style: const TextStyle(fontSize: 22)),
                   const SizedBox(height: 2),
                   Text(
-                    category.name,
+                    type.name,
                     style: const TextStyle(fontSize: 9),
                     textAlign: TextAlign.center,
                     maxLines: 2,

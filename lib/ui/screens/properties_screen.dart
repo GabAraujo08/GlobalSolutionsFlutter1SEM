@@ -1,31 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:globalsolutionsflutter1sem/model/mission_category.dart';
-import 'package:globalsolutionsflutter1sem/model/space_mission.dart';
-import 'package:globalsolutionsflutter1sem/repository/mission_category_repository.dart';
-import 'package:globalsolutionsflutter1sem/repository/space_mission_repository.dart';
-import 'package:globalsolutionsflutter1sem/ui/components/mission_category_card.dart';
-import 'package:globalsolutionsflutter1sem/ui/components/mission_list_card.dart';
+import 'package:globalsolutionsflutter1sem/model/property_type.dart';
+import 'package:globalsolutionsflutter1sem/model/solar_property.dart';
+import 'package:globalsolutionsflutter1sem/repository/property_type_repository.dart';
+import 'package:globalsolutionsflutter1sem/repository/solar_property_repository.dart';
+import 'package:globalsolutionsflutter1sem/ui/components/property_type_card.dart';
+import 'package:globalsolutionsflutter1sem/ui/components/property_list_card.dart';
 import 'package:globalsolutionsflutter1sem/ui/components/space_top_app_bar.dart';
 
-// Tela principal — lista de missões com filtro por categoria
-// Requisitos 3, 4, 5 e 6 da entrega
-class MissionsScreen extends StatefulWidget {
-  final ValueChanged<SpaceMission> onMissionClick;
+class PropertiesScreen extends StatefulWidget {
+  final ValueChanged<SolarProperty> onPropertyClick;
   final VoidCallback onAboutClick;
 
-  const MissionsScreen({
+  const PropertiesScreen({
     super.key,
-    required this.onMissionClick,
+    required this.onPropertyClick,
     required this.onAboutClick,
   });
 
   @override
-  State<MissionsScreen> createState() => _MissionsScreenState();
+  State<PropertiesScreen> createState() => _PropertiesScreenState();
 }
 
-class _MissionsScreenState extends State<MissionsScreen> {
-  late List<MissionCategory> categoriesState;
-  late List<SpaceMission> missionsState;
+class _PropertiesScreenState extends State<PropertiesScreen> {
+  late List<PropertyType> typesState;
+  late List<SolarProperty> propertiesState;
 
   bool _filtered = false;
   final TextEditingController _searchController = TextEditingController();
@@ -33,8 +31,8 @@ class _MissionsScreenState extends State<MissionsScreen> {
   @override
   void initState() {
     super.initState();
-    categoriesState = getAllMissionCategories();
-    missionsState = getAllSpaceMissions();
+    typesState = getAllPropertyTypes();
+    propertiesState = getAllSolarProperties();
   }
 
   @override
@@ -43,11 +41,11 @@ class _MissionsScreenState extends State<MissionsScreen> {
     super.dispose();
   }
 
-  void _filterByCategory(MissionCategory category) {
+  void _filterByType(PropertyType type) {
     setState(() {
       _filtered = true;
       _searchController.clear();
-      missionsState = getMissionsByCategory(category);
+      propertiesState = getPropertiesByType(type);
     });
   }
 
@@ -55,16 +53,16 @@ class _MissionsScreenState extends State<MissionsScreen> {
     setState(() {
       _filtered = false;
       _searchController.clear();
-      missionsState = getAllSpaceMissions();
+      propertiesState = getAllSolarProperties();
     });
   }
 
   void _onSearchChanged(String query) {
     setState(() {
       _filtered = query.isNotEmpty;
-      missionsState = query.isEmpty
-          ? getAllSpaceMissions()
-          : searchMissions(query);
+      propertiesState = query.isEmpty
+          ? getAllSolarProperties()
+          : searchProperties(query);
     });
   }
 
@@ -85,20 +83,19 @@ class _MissionsScreenState extends State<MissionsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Lista horizontal de categorias (filtros)
             SizedBox(
               height: 100,
               width: double.infinity,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 4),
-                itemCount: categoriesState.length,
+                itemCount: typesState.length,
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
                 itemBuilder: (context, index) {
-                  final category = categoriesState[index];
-                  return MissionCategoryCard(
-                    category: category,
-                    onClick: _filterByCategory,
+                  final type = typesState[index];
+                  return PropertyTypeCard(
+                    type: type,
+                    onClick: _filterByType,
                   );
                 },
               ),
@@ -106,12 +103,11 @@ class _MissionsScreenState extends State<MissionsScreen> {
 
             const SizedBox(height: 12),
 
-            // Cabeçalho da lista + botão de limpar filtro
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  _filtered ? 'Missões filtradas' : 'Todas as missões',
+                  _filtered ? 'Imóveis filtrados' : 'Todos os imóveis',
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 if (_filtered)
@@ -123,12 +119,11 @@ class _MissionsScreenState extends State<MissionsScreen> {
               ],
             ),
 
-            // Campo de busca por nome/destino
             TextField(
               controller: _searchController,
               onChanged: _onSearchChanged,
               decoration: InputDecoration(
-                hintText: 'Buscar missão ou destino...',
+                hintText: 'Buscar por nome ou endereço...',
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -139,17 +134,16 @@ class _MissionsScreenState extends State<MissionsScreen> {
 
             const SizedBox(height: 12),
 
-            // Lista vertical de missões
             Expanded(
-              child: missionsState.isEmpty
-                  ? const Center(child: Text('Nenhuma missão encontrada'))
+              child: propertiesState.isEmpty
+                  ? const Center(child: Text('Nenhum imóvel encontrado'))
                   : ListView.builder(
-                      itemCount: missionsState.length,
+                      itemCount: propertiesState.length,
                       itemBuilder: (context, index) {
-                        final mission = missionsState[index];
-                        return MissionListCard(
-                          mission: mission,
-                          onClick: widget.onMissionClick,
+                        final property = propertiesState[index];
+                        return PropertyListCard(
+                          property: property,
+                          onClick: widget.onPropertyClick,
                         );
                       },
                     ),

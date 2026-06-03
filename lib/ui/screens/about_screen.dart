@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globalsolutionsflutter1sem/ui/components/space_top_app_bar.dart';
 
-// Tela "Sobre" — conta como uma das 4 telas obrigatórias da navegação (requisito 3)
-// TODO: preencha com os dados reais do grupo
 class AboutScreen extends StatelessWidget {
   final VoidCallback onBackClick;
 
@@ -21,11 +19,11 @@ class AboutScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 16),
 
-            Icon(Icons.rocket_launch, size: 80, color: colors.primary),
+            Icon(Icons.wb_sunny_rounded, size: 80, color: colors.primary),
             const SizedBox(height: 16),
 
             Text(
-              'SpaceExpedition', // TODO: nome final do app
+              'SunScore',
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall
@@ -58,10 +56,12 @@ class AboutScreen extends StatelessWidget {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
-                    // TODO: descreva o problema/solução da Global Solution aqui
                     const Text(
-                      'Este aplicativo foi desenvolvido como parte da Global Solution '
-                      'da FIAP. O objetivo é [descreva o objetivo do seu projeto aqui].',
+                      'O SunScore é um app preditivo de viabilidade energética desenvolvido '
+                      'para a Global Solution da FIAP. Cruzamos dados de constelações de '
+                      'satélites (irradiação solar, aerossóis, temperatura e clima espacial) '
+                      'para gerar relatórios financeiros precisos — Payback, TIR e Score de '
+                      'Risco Climático — democratizando o acesso à energia solar no Brasil.',
                     ),
                   ],
                 ),

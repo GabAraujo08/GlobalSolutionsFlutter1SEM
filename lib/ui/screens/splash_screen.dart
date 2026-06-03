@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globalsolutionsflutter1sem/navigation/app_routes.dart';
 
-// Tela de Splash — exibida brevemente ao abrir o app
-// Requisito 1 da entrega (0,5 ponto)
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -14,7 +12,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Navega para a intro após 2 segundos
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         Navigator.pushReplacementNamed(context, AppRoutes.intro);
@@ -25,26 +22,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xFF1C1917), // dark warm
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // -----------------------------------------------------------------
-            // LOGO: substitua o Icon abaixo por:
-            //   Image.asset('assets/images/logo.png', width: 120, height: 120)
-            // quando tiver o arquivo de logo pronto
-            // -----------------------------------------------------------------
             const Icon(
-              Icons.rocket_launch,
+              Icons.wb_sunny_rounded,
               size: 100,
-              color: Colors.white,
+              color: Color(0xFFF59E0B),
             ),
             const SizedBox(height: 24),
             const Text(
-              'SpaceExpedition', // TODO: troque pelo nome final do app
+              'SunScore',
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 36,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 letterSpacing: 2,
@@ -52,8 +44,8 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Explorando o universo', // TODO: ajuste o slogan
-              style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.7)),
+              'Inteligência orbital para energia solar',
+              style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.65)),
             ),
           ],
         ),

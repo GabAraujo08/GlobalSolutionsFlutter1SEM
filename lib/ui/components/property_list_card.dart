@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:globalsolutionsflutter1sem/model/space_mission.dart';
+import 'package:globalsolutionsflutter1sem/model/solar_property.dart';
 
-// Card de missão exibido na lista vertical da tela principal
-// Equivalente ao BoardGameCardList do projeto de referência
-class MissionListCard extends StatelessWidget {
-  final SpaceMission mission;
-  final Function(SpaceMission)? onClick;
+class PropertyListCard extends StatelessWidget {
+  final SolarProperty property;
+  final Function(SolarProperty)? onClick;
 
-  const MissionListCard({
+  const PropertyListCard({
     super.key,
-    required this.mission,
+    required this.property,
     this.onClick,
   });
 
@@ -27,21 +25,11 @@ class MissionListCard extends StatelessWidget {
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          onTap: onClick != null ? () => onClick!(mission) : null,
+          onTap: onClick != null ? () => onClick!(property) : null,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                // ---------------------------------------------------------
-                // IMAGEM: quando tiver a imagem, substitua este Container por:
-                //   ClipRRect(
-                //     borderRadius: BorderRadius.circular(8),
-                //     child: Image.asset(
-                //       mission.imagePath,
-                //       width: 60, height: 60, fit: BoxFit.cover,
-                //     ),
-                //   )
-                // ---------------------------------------------------------
                 Container(
                   width: 60,
                   height: 60,
@@ -51,9 +39,9 @@ class MissionListCard extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      mission.categories.isNotEmpty
-                          ? mission.categories.first.emoji
-                          : '🚀',
+                      property.types.isNotEmpty
+                          ? property.types.first.emoji
+                          : '☀️',
                       style: const TextStyle(fontSize: 28),
                     ),
                   ),
@@ -64,17 +52,19 @@ class MissionListCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        mission.title,
+                        property.title,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        mission.destination,
+                        property.address,
                         style: Theme.of(context).textTheme.bodySmall,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Ano: ${mission.year}',
+                        'SunScore: ${property.sunScoreIndex.toStringAsFixed(0)}/100',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: colors.primary,
                               fontWeight: FontWeight.w600,
