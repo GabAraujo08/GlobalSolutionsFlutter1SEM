@@ -88,10 +88,9 @@ class AboutScreen extends StatelessWidget {
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
-                    // TODO: adicione os nomes do grupo
-                    const _MemberTile(name: 'Nome do integrante 1', rm: 'RM XXXXX'),
-                    const _MemberTile(name: 'Nome do integrante 2', rm: 'RM XXXXX'),
-                    const _MemberTile(name: 'Nome do integrante 3', rm: 'RM XXXXX'),
+                    const _MemberTile(name: 'Arthur Brugnerotto Cerqueira', rm: 'RM 558836'),
+                    const _MemberTile(name: 'Gabriel Araujo da Silva Brito', rm: 'RM 558802'),
+                    const _MemberTile(name: 'Giovana Santos Silva', rm: 'RM 558873'),
                   ],
                 ),
               ),
