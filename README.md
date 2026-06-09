@@ -28,16 +28,16 @@ real de geração de energia e o retorno exato do investimento.
 ### 1. Splash Screen
 > Tela inicial exibida por 2 segundos ao abrir o app.
 
-![Splash Screen](screenshots/01_splash.png)
+![Splash Screen](screenshots/splash.png)
 
 ---
 
 ### 2. Introdução (Onboarding)
 > 3 páginas explicando o app com botões "Voltar" e "Próximo / Começar".
 
-![Intro – Página 1](screenshots/02_intro_1.png)
-![Intro – Página 2](screenshots/02_intro_2.png)
-![Intro – Página 3](screenshots/02_intro_3.png)
+![Intro – Página 1](screenshots/intro_1.png)
+![Intro – Página 2](screenshots/intro_2.png)
+![Intro – Página 3](screenshots/intro_3.png)
 
 ---
 
@@ -45,7 +45,7 @@ real de geração de energia e o retorno exato do investimento.
 > Lista de imóveis cadastrados com filtro por tipo (Residencial, Comercial, Industrial, Rural,
 > Alto Risco, Premium ROI) e campo de busca por nome ou endereço.
 
-![Tela Principal](screenshots/03_home.png)
+![Tela Principal](screenshots/home.png)
 
 ---
 
@@ -53,11 +53,11 @@ real de geração de energia e o retorno exato do investimento.
 > Exibe a análise orbital completa do imóvel selecionado: endereço, área do telhado, conta mensal,
 > SunScore, Payback estimado e TIR.
 
-![Detalhe do Imóvel](screenshots/04_detail.png)
+![Detalhe do Imóvel](screenshots/detalhes_imovel.png)
 
 ---
 
 ### 5. Tela Sobre
 > Informações do projeto e integrantes do grupo.
 
-![Sobre](screenshots/05_about.png)
+![Sobre](screenshots/sobre.png)

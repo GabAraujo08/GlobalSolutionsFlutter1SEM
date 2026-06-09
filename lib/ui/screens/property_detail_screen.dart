@@ -68,7 +68,7 @@ class PropertyDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // Indicadores financeiros
+            
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),

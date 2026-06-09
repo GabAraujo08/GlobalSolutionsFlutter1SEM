@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-// Tipo de imóvel / perfil de instalação
+
 class PropertyType extends Equatable {
   final String name;
   final String emoji;
